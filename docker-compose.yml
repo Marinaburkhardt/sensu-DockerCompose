@@ -31,6 +31,12 @@ services:
       - 3000:3000  # Uchiwa dashboard
     networks:
       - sensu_net
+  
+  sensu-client:
+    build: sensu-client/
+    image: sensu-client
+    networks:
+      - sensu_net
 
 networks:
   sensu_net:

@@ -1,0 +1,21 @@
+FROM ubuntu:16.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+  && apt-get install -y wget apt-utils apt-transport-https \
+  && wget -q https://sensu.global.ssl.fastly.net/apt/pubkey.gpg -O- | apt-key add - \
+  && echo "deb     https://sensu.global.ssl.fastly.net/apt sensu main" | tee /etc/apt/sources.list.d/sensu.list \
+  && apt-get update \
+  && apt-get install -y sensu
+
+COPY configurationFiles/transport.json /etc/sensu/conf.d/
+
+#Sensu client configuration
+COPY configurationFiles/client.json /etc/sensu/conf.d/client.json
+
+#Install checks
+RUN sensu-install -p disk-checks \
+    && sensu-install -p cpu-checks \
+    && sensu-install -p memory-checks
+

@@ -1,0 +1,9 @@
+{
+        "client": {
+        "environment": "development",
+        "subscriptions": [
+          "ALL"
+          ]
+        }
+    }
+
