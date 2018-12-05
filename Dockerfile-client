@@ -22,4 +22,6 @@ RUN sensu-install -p disk-checks \
     && sensu-install -p cpu-checks \
     && sensu-install -p memory-checks
 
+EXPOSE 3000
+
 CMD ["/usr/bin/supervisord"]
