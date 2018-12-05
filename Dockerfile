@@ -31,3 +31,4 @@ EXPOSE 4567
 EXPOSE 3000
 
 CMD ["/usr/bin/supervisord"]
+

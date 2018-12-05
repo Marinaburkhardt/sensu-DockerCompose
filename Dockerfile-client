@@ -7,15 +7,19 @@ RUN apt-get update \
   && wget -q https://sensu.global.ssl.fastly.net/apt/pubkey.gpg -O- | apt-key add - \
   && echo "deb     https://sensu.global.ssl.fastly.net/apt sensu main" | tee /etc/apt/sources.list.d/sensu.list \
   && apt-get update \
-  && apt-get install -y sensu
+  && apt-get install -y sensu supervisor
 
 COPY configurationFiles/transport.json /etc/sensu/conf.d/
+COPY configurationFiles/rabbitmq-client.json /etc/sensu/conf.d/
+
+COPY configurationFiles/supervisord-client.conf /etc/supervisor/conf.d/supervisord.conf
 
 #Sensu client configuration
-COPY configurationFiles/client.json /etc/sensu/conf.d/client.json
+COPY configurationFiles/client-sensuClient.json /etc/sensu/conf.d/client.json
 
 #Install checks
 RUN sensu-install -p disk-checks \
     && sensu-install -p cpu-checks \
     && sensu-install -p memory-checks
 
+CMD ["/usr/bin/supervisord"]

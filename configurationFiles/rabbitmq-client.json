@@ -1,6 +1,6 @@
 {
   "rabbitmq": {
-    "host": "sensu",
+    "host": "sensu-docker-server",
     "port": 5672,
     "vhost": "/sensu",
     "user": "sensu",
