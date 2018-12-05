@@ -19,7 +19,7 @@ services:
       - 15672:15672 # management API
     networks:
       - sensu_net
-  sensu: 
+  sensu:
     hostname: sensu-docker-server
     build: .
     image: sensu
@@ -32,7 +32,7 @@ services:
       - 3000:3000  # Uchiwa dashboard
     networks:
       - sensu_net
-  
+
   sensu-client:
     hostname: sensu-docker-client
     build:
@@ -41,6 +41,8 @@ services:
     image: sensu-client
     networks:
       - sensu_net
+    links:
+      - rabbitmq
 
 networks:
   sensu_net:

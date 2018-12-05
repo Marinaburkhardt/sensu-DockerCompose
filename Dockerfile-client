@@ -10,7 +10,7 @@ RUN apt-get update \
   && apt-get install -y sensu supervisor
 
 COPY configurationFiles/transport.json /etc/sensu/conf.d/
-COPY configurationFiles/rabbitmq-client.json /etc/sensu/conf.d/
+COPY configurationFiles/rabbitmq-client.json /etc/sensu/conf.d/rabbitmq.json
 
 COPY configurationFiles/supervisord-client.conf /etc/supervisor/conf.d/supervisord.conf
 
